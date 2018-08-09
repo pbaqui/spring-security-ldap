@@ -1,10 +1,11 @@
 package py.com.kalpa.springsecurityldap.controller;
 
+import java.security.Principal;
 import java.util.Date;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.stereotype.Controller;
+import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -18,8 +19,13 @@ public class HomeController {
     private static Logger log = LoggerFactory.getLogger(HomeController.class);
 
 	@GetMapping
-	public String index() {
-		return "<h1> Bienvenido " + new Date() + "! </h1>";
+	public String index(Authentication auth, Principal principal) {
+		
+		//Authentication auth = SecurityContextHolde.getContext().getAuthentication();
+		
+		return "<h1> Bienvenido " + auth.getName()  + " la fecha es: " +new Date() + "! </h1>" +
+		"<h1> Sus Roles:  " + auth.getAuthorities()  +"</h1>"+
+				"<h1> Principal:  " + principal.getName() +"</h1>";
 		
 		
 	}

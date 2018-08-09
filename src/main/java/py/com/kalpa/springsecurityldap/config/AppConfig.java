@@ -7,7 +7,5 @@ import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 @Configuration
 @EnableWebMvc
 @ComponentScan("py.com.kalpa.springsecurityldap.controller")
-public class AppConfig {
-
+public class AppConfig  {
 }
-
