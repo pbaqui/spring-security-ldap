@@ -4,4 +4,3 @@ target/
 .settings/
 .DS_Store
 .tern-project
-src/main/resources/application.properties

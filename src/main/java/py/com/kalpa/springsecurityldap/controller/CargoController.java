@@ -28,7 +28,7 @@ public class CargoController {
 
 	protected Logger logger = Logger.getLogger(getClass().getName());
 
-	@Secured("ROLE_ADMIN")
+//	@Secured("ROLE_ADMIN")
 	@PostMapping
 	public ResponseEntity<Cargo> save(@RequestBody Cargo entity) {
 		logger.info("Guardando registro: " + entity);
@@ -36,13 +36,13 @@ public class CargoController {
 		return ResponseEntity.status(HttpStatus.CREATED).body(entity);
 	}
 
-	@PreAuthorize("hasAnyRole('ADMIN','DESARROLLADOR')")
+//	@PreAuthorize("hasAnyRole('ADMIN','DESARROLLADOR')")
 	@GetMapping
 	public ResponseEntity<List<Cargo>> getList() {
 		return ResponseEntity.ok(repository.findAll());
 	}
 
-	@PreAuthorize("hasAuthority('LISTAR_CARGO')") 
+//	@PreAuthorize("hasAuthority('LISTAR_CARGO')") 
 	@GetMapping("{id}")
 	public ResponseEntity<Cargo> find(@PathVariable Long id) {
 		Cargo entity = repository.findOne(id);

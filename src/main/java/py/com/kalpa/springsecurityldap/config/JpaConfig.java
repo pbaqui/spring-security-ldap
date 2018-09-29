@@ -21,7 +21,7 @@ import org.springframework.transaction.PlatformTransactionManager;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
 
 @Configuration
-@EnableJpaRepositories({ "py.com.kalpa.springsecurityldap.repository" })
+@EnableJpaRepositories({"py.com.kalpa.springsecurityldap.repository"})
 @PropertySource("classpath:application.properties")
 @EnableJpaAuditing
 @EnableTransactionManagement

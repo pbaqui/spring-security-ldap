@@ -23,13 +23,14 @@ import py.com.kalpa.springsecurityldap.seguridad.CustomActiveDirectoryLdapAuthen
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
 	private RoleRepository roleRepository;
-
+	
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
 		http.csrf().disable().authorizeRequests()
 		.anyRequest().authenticated()
 		.and().formLogin().permitAll()
-		.and().logout().permitAll();//.and().exceptionHandling().accessDeniedPage("/error_403");
+		.and().logout().permitAll();
+		//.and().cors();//.and().exceptionHandling().accessDeniedPage("/error_403");
 	}
 
 	@Override
