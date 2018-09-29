@@ -1,0 +1,15 @@
+<div class="row">
+
+    <button class="btn btn-warning" title="Crear" ng-click="onNewBtnClicked()" ng-if="mostrarNuevoBtn">
+                       <i class="material-icons">add</i>
+                    </button>
+
+    <button class="btn btn-success" title="Guardar" ng-click="onSaveBtnClicked(form.$valid)" ng-if="mostrarGuardarBtn">
+                       <i class="material-icons">save</i>
+                    </button>
+
+    <button class="btn btn-danger" title="Borrar" ng-click="onDeleteBtnClicked()" ng-if="mostrarBorrarBtn">
+                       <i class="material-icons">delete</i>
+                    </button>
+
+</div>

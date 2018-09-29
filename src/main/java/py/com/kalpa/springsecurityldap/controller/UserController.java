@@ -30,7 +30,7 @@ public class UserController {
 
 	protected Logger logger = Logger.getLogger(getClass().getName());
 
-	@Secured("ROLE_ADMIN")
+//	@Secured("ROLE_ADMIN")
 	@PostMapping
 	public ResponseEntity<Usuario> save(@RequestBody Usuario entity) {
 		logger.info("Guardando registro: " + entity);
@@ -38,13 +38,13 @@ public class UserController {
 		return ResponseEntity.status(HttpStatus.CREATED).body(entity);
 	}
 
-	@PreAuthorize("hasAnyRole('ADMIN','DESARROLLADOR')")
+//	@PreAuthorize("hasAnyRole('ADMIN','DESARROLLADOR')")
 	@GetMapping
 	public ResponseEntity<List<Usuario>> getList() {
 		return ResponseEntity.ok(repository.findAll());
 	}
 
-	@PreAuthorize("#username == authentication.name")
+//	@PreAuthorize("#username == authentication.name")
 	//@PostAuthorize("hasAnyRole('ADMIN')")
 	@GetMapping("{username}")
 	public ResponseEntity<Usuario> find(@PathVariable String username) {

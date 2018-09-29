@@ -21,6 +21,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.context.ApplicationContext;
 import org.springframework.dao.IncorrectResultSizeDataAccessException;
 import org.springframework.ldap.core.DirContextOperations;
 import org.springframework.ldap.core.support.DefaultDirObjectFactory;
@@ -47,6 +48,9 @@ public final class CustomActiveDirectoryLdapAuthenticationProvider extends Abstr
 
 	@Autowired
 	private RoleRepository roleRepository;
+	
+	@Autowired
+	private ApplicationContext appContext;
 
 	private static final Pattern SUB_ERROR_CODE = Pattern.compile(".*data\\s([0-9a-f]{3,4}).*");
 
@@ -106,6 +110,11 @@ public final class CustomActiveDirectoryLdapAuthenticationProvider extends Abstr
 		List<GrantedAuthority> authorities = new ArrayList();
 		List<String> roles = roleRepository.buscarRolesPorUsuario(username);
 		List<Permiso> privilegios = roleRepository.buscarPermisosPorUsuario(username);
+		
+		/*Almacenar datos en la sesion*/
+		SesionUsuario sesionUsuario = appContext.getBean(SesionUsuario.class);
+		sesionUsuario.setUsuarioPorConfirmar(username);
+		sesionUsuario.setPermisosPorConfirmar(privilegios);
 
 		// Los roles en la base de datos deben tener el prefijo 'ROLE_' o se lo agrega
 		String DEFAULT_ROLE_PREFIX = "ROLE_";

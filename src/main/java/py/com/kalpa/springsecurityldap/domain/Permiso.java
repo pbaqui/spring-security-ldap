@@ -10,6 +10,8 @@ import javax.persistence.Id;
 import javax.persistence.ManyToMany;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 @Entity
 @Table(name = "permiso")
 public class Permiso implements Serializable {
@@ -22,6 +24,7 @@ public class Permiso implements Serializable {
 
 	private String nombre;
 
+	@JsonIgnore
 	@ManyToMany(mappedBy = "permisos")
 	private Collection<Role> roles;
 

@@ -1,0 +1,25 @@
+<div class="card" ng-controller="TareasPendientesController">
+
+    <div class="card-header" data-background-color="red">
+        <h3>Tareas pendientes</h3>
+    </div>
+    <div class="card-content">
+        <table class="table">
+           <thead>
+               <tr>
+                   <th>SOLICITANTE</th>
+                   <th>FECHA</th>
+                   <th>SOLICITUD</th>  
+               </tr>
+            </thead>
+            <tbody>
+                <tr ng-repeat="t in tareasPendientes">
+                    <td>{{t.solicitante.nombre + ' '+ t.solicitante.apellido}}</td>
+                    <td>{{t.fechaSolicitudStr}}</td>
+                    <td>{{t.tipoTarea.nombre}}</td>
+                </tr>
+            </tbody>
+        </table>
+
+    </div>
+</div>
