@@ -54,5 +54,8 @@ app.config(function ($routeProvider, $locationProvider) {
         })
         .when('/tareas-finalizadas', {
             templateUrl: 'vistas/tarea/tareas_finalizadas.html'
+        })
+        .when('/test', {
+            templateUrl: 'vistas/test/test.html'
         });
 });

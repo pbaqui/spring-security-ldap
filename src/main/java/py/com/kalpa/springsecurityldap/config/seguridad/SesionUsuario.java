@@ -7,8 +7,6 @@ import org.springframework.stereotype.Component;
 import org.springframework.web.context.annotation.SessionScope;
 
 import py.com.kalpa.springsecurityldap.domain.Permiso;
-import py.com.kalpa.springsecurityldap.domain.Usuario;
-
 @Component
 @SessionScope
 public class SesionUsuario {

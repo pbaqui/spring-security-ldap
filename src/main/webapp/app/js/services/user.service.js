@@ -1,9 +1,14 @@
 /*global angular, app, FormData*/
 
-app.service('UserService', ['$http', 'GenericService', function ($http, GenericService) {
+app.service('UserService', ['$http', function ($http) {
 
-    return angular.extend({}, GenericService, {
-        mapping: "users",
+    return {
+        config: {
+            headers: {
+                'Content-Type': undefined
+            },
+            transformRequest: angular.identity
+        },
         
         login: function (username, password) {
            var fd = new FormData();
@@ -21,5 +26,5 @@ app.service('UserService', ['$http', 'GenericService', function ($http, GenericS
             return $http.get(app.API_URL_BASE + "sesion/info");
         }
         
-    });
+    };
 }]);

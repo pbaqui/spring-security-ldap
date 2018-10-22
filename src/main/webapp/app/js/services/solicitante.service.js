@@ -4,6 +4,6 @@ app.service('SolicitanteService', function (GenericService) {
     return angular.extend(
         {}, //objeto destino -> resultado
         GenericService, 
-        {mapping: app.API_URL_BASE + "solicitantes/"}
+        {mapping: app.API_URL_BASE + "solicitante/"}
     );
 });

@@ -4,7 +4,7 @@ app.service('GenericService', function ($http, $log) {
     return {
         config: {
             headers: {
-                'Content-Type': undefined
+                'Content-Type': 'application/json'
             },
             transformRequest: angular.identity
         },

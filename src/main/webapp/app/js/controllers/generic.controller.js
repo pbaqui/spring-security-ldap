@@ -14,9 +14,15 @@ app.controller('GenericController', function ($scope, $http, $log) {
             $scope.errorMsg = "Errores de validacion";
             return;
         }
-        var formData = $scope.loadFormData();
+        var formData = $scope.entity;
 
-        $scope.service.save(formData)
+        var cargo ={};
+        cargo.nombre = formData.nombre;  
+        if(formData.id != undefined && formData.id != null){
+            cargo.id = formData.id;
+        }
+
+        $scope.service.save(JSON.stringify(cargo))
             .then($scope.onSaveSuccess, $scope.onSaveError);
     };
 

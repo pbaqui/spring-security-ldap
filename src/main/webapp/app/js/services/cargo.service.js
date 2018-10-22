@@ -4,6 +4,6 @@ app.service('CargoService', function (GenericService) {
     return angular.extend(
         {}, //objeto destino -> resultado
         GenericService, 
-        {mapping: app.API_URL_BASE + "cargos/"}
+        {mapping: app.API_URL_BASE + "cargo/"}
     );
 });

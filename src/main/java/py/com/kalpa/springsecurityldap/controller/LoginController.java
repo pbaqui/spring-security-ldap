@@ -33,11 +33,13 @@ public class LoginController {
 	private SesionController sesionController;
 
 	@PostMapping("login")
-	public ResponseEntity<SesionInfo> login(ModelMap model, HttpServletRequest request, HttpServletResponse response,
+	public ResponseEntity<SesionInfo> login(ModelMap model, HttpServletRequest request, 
+			HttpServletResponse response,
 			@RequestParam String username, @RequestParam String password) throws ServletException {
 
 		try {
 			request.login(username, password);
+			
 			loginSuccessHandler.onAuthenticationSuccess(request, response,
 					SecurityContextHolder.getContext().getAuthentication());
 
@@ -51,7 +53,8 @@ public class LoginController {
 			logger.log(Level.SEVERE, "Error en login-> usuario: " + username, ex);
 			HttpHeaders headers = new HttpHeaders();
 			headers.add("error", ex.getMessage());
-			return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).headers(headers).body(new SesionInfo());
+			return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
+					.headers(headers).body(new SesionInfo());
 		}
 	}
 

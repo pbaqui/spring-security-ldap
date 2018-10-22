@@ -6,14 +6,13 @@ import java.util.List;
 import com.fasterxml.jackson.annotation.JsonFormat;
 
 import py.com.kalpa.springsecurityldap.domain.Permiso;
-import py.com.kalpa.springsecurityldap.domain.Usuario;
-
 
 public class SesionInfo {
 	@JsonFormat(pattern = "dd/MM/yyyy HH:mm")
 	private Date fechaHoraInicio;
 	private String usuario;
 	private List<Permiso> permisos;
+	private String esAuditor;
 
 	public Date getFechaHoraInicio() {
 		return fechaHoraInicio;

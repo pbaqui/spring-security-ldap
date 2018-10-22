@@ -16,6 +16,7 @@ import org.springframework.security.authentication.ProviderManager;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
+import org.springframework.security.config.annotation.web.builders.WebSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.config.annotation.web.configurers.ExpressionUrlAuthorizationConfigurer;
@@ -52,7 +53,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 		expression.antMatchers(HttpMethod.GET, "/solicitantes/**").permitAll();
 		expression.antMatchers(HttpMethod.POST, "/solicitantes/**").permitAll();
 		expression.antMatchers(HttpMethod.DELETE, "/solicitantes/**").permitAll();
-		http.cors();
+		http.cors().disable();
 		//desabilitar Cross-site request forgery
 		http.csrf().disable();
 	}
@@ -68,7 +69,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 		return new ProviderManager(Arrays.asList(activeDirectoryLdapAuthenticationProvider()));
 	}
 
-	// Retornar 401 cuando usuario no estÃ© autenticado
+	// Retornar 401 cuando usuario no esta autenticado
 	private AuthenticationEntryPoint getAuthenticationEntryPoint() {
 
 		return new AuthenticationEntryPoint() {
@@ -94,5 +95,5 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 	@Bean
 	GrantedAuthorityDefaults grantedAuthorityDefaults() {
 		return new GrantedAuthorityDefaults(""); // Elimina el prefijo ROLE_
-	}
+	}	
 }

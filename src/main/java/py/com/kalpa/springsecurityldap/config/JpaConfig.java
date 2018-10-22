@@ -11,6 +11,7 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.PropertySource;
 import org.springframework.core.env.Environment;
 import org.springframework.dao.annotation.PersistenceExceptionTranslationPostProcessor;
+import org.springframework.data.domain.AuditorAware;
 import org.springframework.data.jpa.repository.config.EnableJpaAuditing;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 import org.springframework.jdbc.datasource.DriverManagerDataSource;
@@ -20,15 +21,22 @@ import org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter;
 import org.springframework.transaction.PlatformTransactionManager;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
 
+import py.com.kalpa.springsecurityldap.config.seguridad.AuditorAwareImpl;
+
 @Configuration
-@EnableJpaRepositories({"py.com.kalpa.springsecurityldap.repository"})
+@EnableJpaRepositories({ "py.com.kalpa.springsecurityldap.repository" })
 @PropertySource("classpath:application.properties")
-@EnableJpaAuditing
+@EnableJpaAuditing(auditorAwareRef = "auditorProvider", modifyOnCreate = false )
 @EnableTransactionManagement
 public class JpaConfig {
 
 	@Autowired
 	private Environment env;
+
+	@Bean
+	AuditorAware<String> auditorProvider() {
+		return new AuditorAwareImpl();
+	}
 
 	@Bean
 	public LocalContainerEntityManagerFactoryBean entityManagerFactory() {

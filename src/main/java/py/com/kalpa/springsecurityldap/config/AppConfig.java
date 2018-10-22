@@ -41,8 +41,8 @@ public class AppConfig extends WebMvcConfigurerAdapter {
 
 	@Override
 	public void addResourceHandlers(ResourceHandlerRegistry registry) {
-		registry.addResourceHandler("/assets/**", "/vistas/**").addResourceLocations("/app/assets/", "/app/vistas/")
-				.setCachePeriod(315569126);
+		registry.addResourceHandler("/assets/**", "/vistas/**").addResourceLocations("/app/assets/", "/app/vistas/");
+				//.setCachePeriod(315569126);
 	}
 
 	@Override
@@ -55,6 +55,8 @@ public class AppConfig extends WebMvcConfigurerAdapter {
 		InternalResourceViewResolver viewResolver = new InternalResourceViewResolver();
 		viewResolver.setPrefix("/app/vistas/");
 		viewResolver.setSuffix(".html");
+		
+		
 		viewResolver.setViewClass(InternalResourceView.class);
 		return viewResolver;
 	}

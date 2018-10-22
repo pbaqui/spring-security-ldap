@@ -15,9 +15,7 @@ import org.springframework.stereotype.Service;
 
 import py.com.kalpa.springsecurityldap.config.seguridad.SesionUsuario;
 import py.com.kalpa.springsecurityldap.domain.LoginInfo;
-import py.com.kalpa.springsecurityldap.domain.Usuario;
 import py.com.kalpa.springsecurityldap.repository.LoginInfoRepository;
-import py.com.kalpa.springsecurityldap.repository.UsuarioRepository;
 
 /**
  * Se ejecuta cuando usuario inicia sesión correctamente
@@ -42,10 +40,7 @@ public class LoginSuccessHandler extends SavedRequestAwareAuthenticationSuccessH
 		loginInfo.setFechaHora(new Date());
 		String userAgent = request.getHeader("User-Agent");
 		int max = userAgent.length();
-		if (max > 250) {
-			max = 250;
-		}
-		loginInfo.setInfo(userAgent.substring(0, max));
+		loginInfo.setInfo(userAgent.substring(0, (max > 250 ? 250 : max )));
 		loginRepo.save(loginInfo);
 
 	}
