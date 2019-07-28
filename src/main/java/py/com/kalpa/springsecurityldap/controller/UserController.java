@@ -6,9 +6,6 @@ import java.util.logging.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.access.annotation.Secured;
-import org.springframework.security.access.prepost.PostAuthorize;
-import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -18,7 +15,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import py.com.kalpa.springsecurityldap.domain.Usuario;
-import py.com.kalpa.springsecurityldap.repository.CargoRepository;
 import py.com.kalpa.springsecurityldap.repository.UsuarioRepository;
 
 @RestController
@@ -48,7 +44,7 @@ public class UserController {
 	//@PostAuthorize("hasAnyRole('ADMIN')")
 	@GetMapping("{username}")
 	public ResponseEntity<Usuario> find(@PathVariable String username) {
-		Usuario entity = repository.findOne(username);
+		Usuario entity = repository.findById(username).orElse(null);
 		if (entity == null) {
 			return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
 		}
@@ -58,7 +54,7 @@ public class UserController {
 	@DeleteMapping("{username}")
 	public ResponseEntity<Usuario> delete(@PathVariable String username) {
 		logger.info("Buscando entidad con id: " + username);
-		Usuario entity = repository.findOne(username);
+		Usuario entity = repository.findById(username).orElse(null);
 		if (entity == null) {
 			logger.info("No se encontró entidad con id: " + username);
 			return ResponseEntity.status(HttpStatus.GONE).build();

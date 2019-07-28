@@ -44,11 +44,11 @@ import py.com.kalpa.springsecurityldap.repository.RoleRepository;
 
 public final class CustomActiveDirectoryLdapAuthenticationProvider extends AbstractLdapAuthenticationProvider {
 
-	private static Logger log = LoggerFactory.getLogger(CustomActiveDirectoryLdapAuthenticationProvider.class);
+	private static final Logger logger = LoggerFactory.getLogger(CustomActiveDirectoryLdapAuthenticationProvider.class);
 
 	@Autowired
 	private RoleRepository roleRepository;
-	
+
 	@Autowired
 	private ApplicationContext appContext;
 
@@ -107,11 +107,11 @@ public final class CustomActiveDirectoryLdapAuthenticationProvider extends Abstr
 	protected Collection<? extends GrantedAuthority> loadUserAuthorities(DirContextOperations userData, String username,
 			String password) {
 		System.out.println("username: " + username);
-		List<GrantedAuthority> authorities = new ArrayList();
+		List<GrantedAuthority> authorities = new ArrayList<>();
 		List<String> roles = roleRepository.buscarRolesPorUsuario(username);
 		List<Permiso> privilegios = roleRepository.buscarPermisosPorUsuario(username);
-		
-		/*Almacenar datos en la sesion*/
+
+		/* Almacenar datos en la sesion */
 		SesionUsuario sesionUsuario = appContext.getBean(SesionUsuario.class);
 		sesionUsuario.setUsuarioPorConfirmar(username);
 		sesionUsuario.setPermisosPorConfirmar(privilegios);
@@ -125,10 +125,10 @@ public final class CustomActiveDirectoryLdapAuthenticationProvider extends Abstr
 		for (Permiso privilegio : privilegios) {
 			authorities.add(new SimpleGrantedAuthority(privilegio.getNombre()));
 		}
-		this.log.info("Usuario [" + username + "] Roles " + Arrays.asList(authorities));
+		logger.info("Usuario [" + username + "] Roles " + Arrays.asList(authorities));
 		return authorities;
 	}
-	
+
 	private String rootDnFromDomain(String domain) {
 		String[] tokens = StringUtils.tokenizeToStringArray(domain, ".");
 		StringBuilder root = new StringBuilder();

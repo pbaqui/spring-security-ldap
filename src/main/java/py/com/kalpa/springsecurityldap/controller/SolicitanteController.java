@@ -16,7 +16,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import py.com.kalpa.springsecurityldap.domain.Solicitante;
-import py.com.kalpa.springsecurityldap.repository.DepartamentoRepository;
 import py.com.kalpa.springsecurityldap.repository.SolicitanteRepository;
 
 @RestController
@@ -25,9 +24,6 @@ public class SolicitanteController {
 	@Autowired
 	private SolicitanteRepository solicitanteRepo;
 
-	@Autowired
-	private DepartamentoRepository departamentoRepo;
-	
 	protected Logger logger = Logger.getLogger(getClass().getName());
 
 	@PostMapping
@@ -37,7 +33,7 @@ public class SolicitanteController {
 		return ResponseEntity.status(HttpStatus.CREATED).body(entity);
 	}
 
-	@PreAuthorize("hasAuthority('LISTAR_SOLICITANTE')") 
+	@PreAuthorize("hasAuthority('LISTAR_SOLICITANTE')")
 	@GetMapping
 	public ResponseEntity<List<Solicitante>> getList() {
 		return ResponseEntity.ok(solicitanteRepo.findAll());
@@ -45,7 +41,7 @@ public class SolicitanteController {
 
 	@GetMapping("{id}")
 	public ResponseEntity<Solicitante> find(@PathVariable Long id) {
-		Solicitante entity = solicitanteRepo.findOne(id);
+		Solicitante entity = solicitanteRepo.findById(id).orElse(null);
 		if (entity == null) {
 			return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
 		}
@@ -55,7 +51,7 @@ public class SolicitanteController {
 	@DeleteMapping("{id}")
 	public ResponseEntity<Solicitante> delete(@PathVariable Long id) {
 		logger.info("Buscando entidad con id: " + id);
-		Solicitante entity = solicitanteRepo.findOne(id);
+		Solicitante entity = solicitanteRepo.findById(id).orElse(null);
 		if (entity == null) {
 			logger.info("No se encontró entidad con id: " + id);
 			return ResponseEntity.status(HttpStatus.GONE).build();

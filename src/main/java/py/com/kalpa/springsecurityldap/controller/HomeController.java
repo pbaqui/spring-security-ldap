@@ -16,7 +16,7 @@ import org.springframework.web.context.annotation.RequestScope;
 @RequestMapping("/")
 public class HomeController {
 
-    private static Logger log = LoggerFactory.getLogger(HomeController.class);
+    private static Logger logger = LoggerFactory.getLogger(HomeController.class);
 
 	@GetMapping
 	public String index(Authentication auth, Principal principal) {

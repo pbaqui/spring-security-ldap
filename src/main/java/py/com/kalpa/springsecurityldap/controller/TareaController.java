@@ -31,7 +31,7 @@ public class TareaController extends GenericController<Tarea> {
 	@GetMapping("{anho}/{mes}/{tipoTareaId}")
 	public ResponseEntity<List<Tarea>> list(@PathVariable Integer anho, @PathVariable Integer mes,
 			@PathVariable Long tipoTareaId) {
-		TipoTarea tpo = tipoTareaRepo.findOne(tipoTareaId);
+		TipoTarea tpo = tipoTareaRepo.findById(tipoTareaId).orElse(null);
 
 		if (tpo == null) {
 			logger.info("No existe tipo Tarea con id: " + tipoTareaId);

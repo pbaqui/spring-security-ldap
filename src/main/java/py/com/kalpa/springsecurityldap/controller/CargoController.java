@@ -6,8 +6,6 @@ import java.util.logging.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.access.annotation.Secured;
-import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -45,7 +43,7 @@ public class CargoController {
 //	@PreAuthorize("hasAuthority('LISTAR_CARGO')") 
 	@GetMapping("{id}")
 	public ResponseEntity<Cargo> find(@PathVariable Long id) {
-		Cargo entity = repository.findOne(id);
+		Cargo entity = repository.findById(id).orElse(null);
 		if (entity == null) {
 			return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
 		}
@@ -55,7 +53,7 @@ public class CargoController {
 	@DeleteMapping("{id}")
 	public ResponseEntity<Cargo> delete(@PathVariable Long id) {
 		logger.info("Buscando entidad con id: " + id);
-		Cargo entity = repository.findOne(id);
+		Cargo entity = repository.findById(id).orElse(null);
 		if (entity == null) {
 			logger.info("No se encontró entidad con id: " + id);
 			return ResponseEntity.status(HttpStatus.GONE).build();

@@ -31,7 +31,7 @@ public abstract class GenericController<T> {
 
 	@GetMapping("{id}")
 	public ResponseEntity<T> find(@PathVariable Long id) {
-		T entity = getRepository().findOne(id);
+		T entity = getRepository().findById(id).orElse(null);
 		if (entity == null) {
 			return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
 		}
@@ -41,7 +41,7 @@ public abstract class GenericController<T> {
 	@DeleteMapping("{id}")
 	public ResponseEntity<T> delete(@PathVariable Long id) {
 		logger.info("Buscando entidad con id: " + id);
-		T entity = getRepository().findOne(id);
+		T entity = getRepository().findById(id).orElse(null);
 		if (entity == null) {
 			logger.info("No se encontró entidad con id: " + id);
 			return ResponseEntity.status(HttpStatus.GONE).build();

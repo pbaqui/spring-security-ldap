@@ -1,12 +1,14 @@
 package py.com.kalpa.springsecurityldap.config.seguridad;
 
+import java.util.Optional;
+
 import org.springframework.data.domain.AuditorAware;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 
 public class AuditorAwareImpl implements AuditorAware<String> {
 
-	public String getCurrentAuditor() {
+	public Optional<String> getCurrentAuditor() {
 
 		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
 
@@ -14,6 +16,6 @@ public class AuditorAwareImpl implements AuditorAware<String> {
 			return null;
 		}
 
-		return authentication.getName();
+		return Optional.of(authentication.getName());
 	}
 }
