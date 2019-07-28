@@ -12,7 +12,6 @@ public class SesionInfo {
 	private Date fechaHoraInicio;
 	private String usuario;
 	private List<Permiso> permisos;
-	private String esAuditor;
 
 	public Date getFechaHoraInicio() {
 		return fechaHoraInicio;
